@@ -1,12 +1,13 @@
 describe "Crawler service" do
 
+  before(:each) do
+    @crawler_service = CrawlerService.new(
+      url: FakeUlta.new.url
+    )
+    @crawler_service.crawl
+  end
+
   context "when fetching url contents" do
-    before(:each) do
-      @crawler_service = CrawlerService.new(
-        url: FakeUlta.new.url
-      )
-      @crawler_service.crawl
-    end
 
     it "should find a product title" do
       expect(@crawler_service.title).to include(FakeUlta.title)
@@ -17,19 +18,22 @@ describe "Crawler service" do
     end
 
     context "and when a URL is broken" do
-      xit "should silently fail crawling" do
+      it "should explicitly return url error msg" do
+        expect { CrawlerService.new(url: "borked").crawl }.to raise_error(Errno::ENOENT)
       end
     end
   end
 
   context "when ready to save data" do
-    xit "should be passed a table to persist to" do
+    it "should call save after crawling" do
+      crawler = CrawlerService.new(url: FakeUlta.url)
+      expect(crawler).to receive(:save!)
+      crawler.crawl
     end
-
-    xit "should be passed a data store strategy" do
-    end
-
-    xit "should successfully save the data" do
+    it "should be persisted to the db" do
+      crawler = CrawlerService.new(url: FakeUlta.url)
+      crawler.crawl
+      expect(Wishlist.last.products.last.title).to include(FakeUlta.title)
     end
   end
 

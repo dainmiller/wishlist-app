@@ -8,10 +8,9 @@
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
-#
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_21_164454) do
+ActiveRecord::Schema.define(version: 2021_03_22_133429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +18,11 @@ ActiveRecord::Schema.define(version: 2021_03_21_164454) do
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.string "url"
-    t.integer "price"
     t.boolean "purchased"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "wishlist_id", null: false
+    t.string "price"
     t.index ["wishlist_id"], name: "index_products_on_wishlist_id"
   end
 

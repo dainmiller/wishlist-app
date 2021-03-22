@@ -25,4 +25,3 @@ feature "Guest adds product to wishlist" do
   end
 
 end
-

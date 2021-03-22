@@ -23,10 +23,15 @@ class CrawlerService < BaseService
   def crawl
     @site = extract_name
     @data = contents_of
+    save! if @data
   end
 
-  def contents_of
-    Nokogiri::HTML.parse(open(@url))
+  def save!
+    (Wishlist.last or Wishlist.create).products.create(
+      title: title,
+      price: price,
+      url: @url
+    )
   end
 
   def title
@@ -40,6 +45,10 @@ class CrawlerService < BaseService
   end
 
   private
+
+  def contents_of
+    Nokogiri::HTML.parse(open(@url))
+  end
 
   # TODO: extract to class
   def strategy_for element
