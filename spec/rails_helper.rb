@@ -62,3 +62,24 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+class FakeUlta
+  def self.url ; new.url ; end
+  def self.title ; new.title ; end
+  def self.price ; new.price ; end
+  def url ; product_url ; end
+  def title ; product_title ; end
+
+  def product_url
+    "https://www.ulta.com/better-than-sex-volumizing-mascara?productId=xlsImpprod5530007"
+  end
+  def product_title
+    "Better Than Sex Mascara - Too Faced"
+  end
+  def price
+    "$26.00"
+  end
+  def not_a_product_url
+    "broken url"
+  end
+end

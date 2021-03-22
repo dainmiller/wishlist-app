@@ -12,17 +12,21 @@ class CrawlerService < BaseService
       }
     }
 
-  def self.crawl(url:)
-    new url
+  def self.run_with url
+    new(url: url)
   end
 
-  def initialize url
-    @site = extract_name_from(url: url)
-    @data = contents_of url
+  def initialize(url:)
+    @url = url
   end
 
-  def contents_of url
-    Nokogiri::HTML.parse(open(url))
+  def crawl
+    @site = extract_name
+    @data = contents_of
+  end
+
+  def contents_of
+    Nokogiri::HTML.parse(open(@url))
   end
 
   def title
@@ -46,7 +50,7 @@ class CrawlerService < BaseService
     )
   end
 
-  def extract_name_from(url:)
-    url.split('.com')[0].split('.')[1]
+  def extract_name
+    @url.split('.com')[0].split('.')[1]
   end
 end

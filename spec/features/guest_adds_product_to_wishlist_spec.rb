@@ -26,14 +26,3 @@ feature "Guest adds product to wishlist" do
 
 end
 
-class FakeUlta
-  def product_url
-    "https://www.ulta.com/confession-ultra-slim-high-intensity-refillable-lipstick-red-0"
-  end
-  def not_a_product_url
-    "something not a url"
-  end
-  def product_title
-    "Confession Ultra Slim High Intensity Refillable Lipstick - Red,0"
-  end
-end

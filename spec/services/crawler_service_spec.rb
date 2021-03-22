@@ -2,17 +2,18 @@ describe "Crawler service" do
 
   context "when fetching url contents" do
     before(:each) do
-      @crawler_service = CrawlerService.crawl(
+      @crawler_service = CrawlerService.new(
         url: FakeUlta.new.url
       )
+      @crawler_service.crawl
     end
 
     it "should find a product title" do
-      expect(@crawler_service.title).to include(FakeUlta.new.title)
+      expect(@crawler_service.title).to include(FakeUlta.title)
     end
 
     it "should find a product price" do
-      expect(@crawler_service.price).to include(FakeUlta.new.price)
+      expect(@crawler_service.price).to include(FakeUlta.price)
     end
 
     context "and when a URL is broken" do
