@@ -1,0 +1,15 @@
+<h1>Add to Your Wishlist</h1>
+
+<%= form_for [@wishlist, @product] do |f| %>
+  <%= f.text_field :url %>
+  <%= f.submit %>
+<% end %>
+
+<h2>Your Wishlist's Products...</h2>
+
+<% @wishlist.products.each do |product| %>
+  <%= link_to product.try(:url),
+    product.try(:url),
+    target: :_blank %><br />
+<% end %>
+

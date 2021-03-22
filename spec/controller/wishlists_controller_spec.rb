@@ -1,0 +1,2 @@
+describe WishlistsController do
+end
