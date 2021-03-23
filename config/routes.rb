@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'events#index'
+  root to: 'wishlists#show'
 
   get '/wishlist', to: 'wishlists#show'
 

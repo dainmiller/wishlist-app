@@ -3,9 +3,7 @@ class Product < ApplicationRecord
 
   validates :url, format: URI::regexp(%w[http https])
 
-  after_create :crawl
-
   def crawl
-    CrawlerService.run_with self.url
+   CrawlerService.run_with(self)
   end
 end

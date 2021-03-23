@@ -39,13 +39,17 @@ describe Product do
 
   context ":after_create" do
     before(:each) do
-      @product = Wishlist.new.products.new(url: FakeUlta.url)
-      @crawler = CrawlerService.new(url: FakeUlta.url)
+      Product.all.each &:destroy
+      @product = Wishlist.create.products.create(url: FakeUlta.url)
+      @crawler = CrawlerService.run_with(
+        @product
+      )
       @crawler.crawl
     end
+
     it "starts crawling the product URL" do
-      expect(CrawlerService).to receive(:run_with).with(FakeUlta.url)
-      @product.save
+      expect(CrawlerService).to receive(:run_with)
+      @product.crawl
     end
 
     context "crawler started" do

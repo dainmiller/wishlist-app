@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     @wishlist = Wishlist.find params[:wishlist_id]
     @product = @wishlist.products.new product_params
     if @product.save
+      @product.crawl
       redirect_to wishlist_path
     else
     end
