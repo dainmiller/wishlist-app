@@ -1,15 +1,14 @@
 class CrawlerService < BaseService
 
-  HOW_TO_FETCH_CONTENT =
-   {
-      ulta: {
-        title: 'title',
-        price: '.ProductPricingPanel'.freeze
-      },
-      amazon: {
-        price: ''
-      }
-   }
+  HOW_TO_FETCH_CONTENT = {
+    ulta: {
+      title: 'title',
+      price: '.ProductPricingPanel'.freeze
+    },
+    amazon: {
+      price: ''
+    }
+  }
 
   def self.run_with product
     new(product)
@@ -23,7 +22,7 @@ class CrawlerService < BaseService
 
   def crawl
     @site ||= extract_name
-    @data ||= contents_of
+    @data ||= all_contents
     save! if @data
   end
 
@@ -51,7 +50,7 @@ class CrawlerService < BaseService
 
   private
 
-  def contents_of
+  def all_contents
     Nokogiri::HTML(HTTParty.get(@url).body)
   end
 
