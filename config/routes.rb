@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'events/index'
   get 'event/index'
 
+  get '/products', to: 'products#index'
+
   resources :wishlists do
     resources :products
   end

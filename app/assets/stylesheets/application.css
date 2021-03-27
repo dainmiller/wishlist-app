@@ -10,6 +10,23 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap
  *= require_tree .
  *= require_self
  */
+
+input[type="text"] {
+  width: 80%;
+  height: 40px;
+  font-size: 20px;
+  border: 1px #aaa solid;
+  padding: 5px;
+  padding-left: 5px;
+  margin: 20px;
+}
+
+input[type="submit"] {
+  margin-top: -8px;
+  height: 45px;
+  margin-left: -25px;
+}

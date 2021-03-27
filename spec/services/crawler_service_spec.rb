@@ -25,7 +25,7 @@ describe "Crawler service" do
           Wishlist.create.products.create(
             url: "broken url"
           )
-        ).crawl }.to raise_error(Errno::ENOENT)
+        ).crawl }.to raise_error(URI::InvalidURIError)
       end
     end
   end

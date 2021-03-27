@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
 
   def index
+    @wishlist = Wishlist.last || Wishlist.create!(title: 'one')
+    @product = Product.new
   end
 
   def show

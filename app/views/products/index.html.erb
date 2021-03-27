@@ -1,0 +1,15 @@
+<div class="pb-2 mt-4 mb-2 border-bottom" style="margin-left: 20px; width: 50%">
+  <h2>Products on Your Wishlist</h2>
+</div>
+
+
+<ul>
+<% @wishlist.products.each do |product| %>
+  <li>
+    <%= link_to product.try(:title), product.try(:url), target: :_blank %>
+    |
+    <%= product.try(:price) %>
+  </li>
+
+<% end %>
+</ul>

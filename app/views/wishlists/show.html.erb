@@ -1,20 +1,13 @@
-<h1>Add to Your Wishlist</h1>
 
-<%= form_for [@wishlist, @product] do |f| %>
-  <%= f.text_field :url %>
-  <%= f.submit %>
-<% end %>
+<div class="jumbotron" style="height: 100%;">
+  <div class="pb-2 mt-4 mb-2 border-bottom" style="margin-left: 20px; width: 50%">
+    <h2>Add to Your Wishlist</h2>
+  </div>
 
-<h2>Your Wishlist's Products...</h2>
+  <%= form_for [@wishlist, @product] do |f| %>
+    <%= f.text_field :url, placeholder: 'wishlist item here', html: { css: 'input-field' } %>
+    <%= f.submit 'add to list', class: 'btn btn-primary' %>
+  <% end %>
 
-<% @wishlist.products.each do |product| %>
-  <%= link_to product.try(:url),
-    product.try(:url),
-    target: :_blank %>
-
-  <%= product.try(:title) %>
-  <%= product.try(:price) %>
-  <br .>
-
-<% end %>
+</div>
 

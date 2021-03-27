@@ -1,14 +1,13 @@
-require 'open-uri'
-
 class CrawlerService < BaseService
 
   HOW_TO_FETCH_CONTENT =
    {
       ulta: {
+        title: 'title',
         price: '.ProductPricingPanel'.freeze
       },
       amazon: {
-        price: '.Amaa'
+        price: ''
       }
    }
 
@@ -36,19 +35,24 @@ class CrawlerService < BaseService
   end
 
   def title
-    @data.title
+    strategy_for :title do |strat|
+      @data.send(strat)
+    end
   end
 
   def price
     strategy_for :price do |strat|
-      @data.css(strat).text()
+      # TODO: Refactor to be generic
+      if @site == 'ulta'
+        @data.css(strat).text().split('e')[1]
+      end
     end
   end
 
   private
 
   def contents_of
-    Nokogiri::HTML.parse(open(@url))
+    Nokogiri::HTML(HTTParty.get(@url).body)
   end
 
   # TODO: extract to class
@@ -63,4 +67,5 @@ class CrawlerService < BaseService
   def extract_name
     @url.split('.com')[0].split('.')[1]
   end
+
 end
