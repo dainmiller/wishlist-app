@@ -54,7 +54,6 @@ class CrawlerService < BaseService
     Nokogiri::HTML(HTTParty.get(@url).body)
   end
 
-  # TODO: extract to class
   def strategy_for element
     yield(
       HOW_TO_FETCH_CONTENT[
